@@ -15,71 +15,40 @@ namespace Dragonology
             DisplayClosingScreen();
         }
 
-
-
         /// <summary>
-        /// instatiate and initialize BlackDragon
+        /// initialize all dragons
         /// </summary>
-        /// <param name="name"></param>
         /// <returns></returns>
-        static Dragon InitializeBlackDragon(string name)
+        static List<Dragon> InitializeAllDragons()
         {
-            Dragon BlackDragon = new Dragon(name);
-            BlackDragon.Breath = "acid";
-            BlackDragon.Located = "swamps and jungles";
-            return BlackDragon;
-        }
+            List<Dragon> dragons = new List<Dragon>();
 
-        /// <summary>
-        /// instatiate and initialize RedDragon
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        static Dragon InitializeRedDragon(string name)
-        {
-            Dragon RedDragon = new Dragon(name);
+            Dragon RedDragon = new Dragon("Red Dragon");
             RedDragon.Breath = "fire";
             RedDragon.Located = "mountains and islands";
-            return RedDragon;
-        }
+            dragons.Add(RedDragon);
 
-        /// <summary>
-        /// instatiate and initialize BlueDragon
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        static Dragon InitializeBlueDragon(string name)
-        {
-            Dragon BlueDragon = new Dragon(name);
+            Dragon BlackDragon = new Dragon("Black Dragon");
+            BlackDragon.Breath = "acid";
+            BlackDragon.Located = "swamps and jungles";
+            dragons.Add(BlackDragon);
+
+            Dragon BlueDragon = new Dragon("Blue Dragon");
             BlueDragon.Breath = "lightning bolt";
             BlueDragon.Located = "sandy deserts";
-            return BlueDragon;
-        }
+            dragons.Add(BlueDragon);
 
-        /// <summary>
-        /// instatiate and initialize GreenDragon
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        static Dragon InitializeGreenDragon(string name)
-        {
-            Dragon GreenDragon = new Dragon(name);
+            Dragon GreenDragon = new Dragon("Green Dragon");
             GreenDragon.Breath = "poisonous gas";
             GreenDragon.Located = "waterfalls and lakes";
-            return GreenDragon;
-        }
+            dragons.Add(GreenDragon);
 
-        /// <summary>
-        /// instatiate and initialize WhiteDragon
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        static Dragon InitializeWhiteDragon(string name)
-        {
-            Dragon WhiteDragon = new Dragon(name);
+            Dragon WhiteDragon = new Dragon("White Dragon");
             WhiteDragon.Breath = "frost";
             WhiteDragon.Located = "snowy plains";
-            return WhiteDragon;
+            dragons.Add(WhiteDragon);
+
+            return dragons;
         }
 
         /// <summary>
@@ -123,7 +92,7 @@ namespace Dragonology
             bool found = false;
             foreach (Dragon dragon in dragons)
             {
-                if (dragon.Name == seaMonsterName)
+                if (dragon.Name.ToUpper() == seaMonsterName.ToUpper())
                 {
                     Console.WriteLine("Name:".PadRight(30) + "Breath".PadRight(30) + "Located In".PadRight(30));
                     Console.WriteLine(new string('_', 95));
@@ -143,33 +112,7 @@ namespace Dragonology
 
         static void DisplayMenu()
         {
-            //
-            // instantiate dragons
-            //
-            Dragon BlackDragon;
-            BlackDragon = InitializeBlackDragon("Black Dragon");
-
-            Dragon RedDragon;
-            RedDragon = InitializeRedDragon("Red Dragon");
-
-            Dragon BlueDragon;
-            BlueDragon = InitializeBlueDragon("Blue Dragon");
-
-            Dragon GreenDragon;
-            GreenDragon = InitializeGreenDragon("Green Dragon");
-
-            Dragon WhiteDragon;
-            WhiteDragon = InitializeWhiteDragon("White Dragon");
-            
-            // 
-            // adding dragons
-            //
-            List<Dragon> dragons = new List<Dragon>();
-            dragons.Add(BlackDragon);
-            dragons.Add(RedDragon);
-            dragons.Add(BlueDragon);
-            dragons.Add(GreenDragon);
-            dragons.Add(WhiteDragon);
+            List<Dragon> dragons = InitializeAllDragons();
 
             string menuChoice;
             bool exiting = false;
