@@ -41,6 +41,10 @@ namespace Dragonology
         #endregion
 
         #region CONSTRUCTORS
+        public Dragon()
+        {
+
+        }
 
         public Dragon(string name)
         {

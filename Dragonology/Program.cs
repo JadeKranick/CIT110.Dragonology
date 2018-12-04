@@ -82,7 +82,7 @@ namespace Dragonology
             Console.WriteLine();
 
             Console.Write("Enter Name: ");
-            string seaMonsterName = Console.ReadLine();
+            string dragonName = Console.ReadLine();
             Console.WriteLine(new string('-', 95));
             Console.WriteLine();
 
@@ -92,7 +92,7 @@ namespace Dragonology
             bool found = false;
             foreach (Dragon dragon in dragons)
             {
-                if (dragon.Name.ToUpper() == seaMonsterName.ToUpper())
+                if (dragon.Name.ToUpper() == dragonName.ToUpper())
                 {
                     Console.WriteLine("Name:".PadRight(30) + "Breath".PadRight(30) + "Located In".PadRight(30));
                     Console.WriteLine(new string('_', 95));
@@ -104,7 +104,94 @@ namespace Dragonology
 
             if (!found)
             {
-                Console.WriteLine($"Unable to locate sea monster named {seaMonsterName}.");
+                Console.WriteLine($"Unable to locate dragon named {dragonName}.");
+            }
+
+            DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// display add dragon
+        /// </summary>
+        /// <param name="dragons"></param>
+        private static void DisplayAddDragon(List<Dragon> dragons)
+        {
+            Dragon userDragon = new Dragon();
+
+            DisplayHeader("Add A Dragon");
+
+            Console.WriteLine("Enter Name: ");
+            userDragon.Name = Console.ReadLine();
+
+            Console.WriteLine("Enter Breath: ");
+            userDragon.Breath = Console.ReadLine();
+
+            Console.WriteLine("Enter Location: ");
+            userDragon.Located = Console.ReadLine();
+
+            dragons.Add(userDragon);
+
+            Console.WriteLine("Dragon successfully added.");
+
+            DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// display delete dragon
+        /// </summary>
+        /// <param name="dragons"></param>
+        private static void DisplayDeleteDragon(List<Dragon> dragons)
+        {
+            {
+                DisplayHeader("Delete A Dragon");
+
+                foreach (Dragon dragon in dragons)
+                {
+                    Console.WriteLine(dragon.Name);
+                }
+                Console.WriteLine();
+
+                Console.Write("Enter Name: ");
+                string dragonName = Console.ReadLine();
+
+                //
+                // get dragon and delete
+                //
+                bool found = false;
+                foreach (Dragon dragon in dragons)
+                {
+                    if (dragon.Name.ToUpper() == dragonName.ToUpper())
+                    {
+                        dragons.Remove(dragon);
+                        Console.WriteLine("Dragon successfully deleted");
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine($"Unable to locate dragon named {dragonName}.");
+                }
+
+                DisplayContinuePrompt();
+            }
+        }
+
+        /// <summary>
+        /// display all dragons info
+        /// </summary>
+        /// <param name="dragons"></param>
+        private static void DisplayAllDragonsInfo(List<Dragon> dragons)
+        {
+            DisplayHeader("Display All Dragons");
+
+            Console.WriteLine("Name:".PadRight(30) + "Breath".PadRight(30) + "Located In".PadRight(30));
+            Console.WriteLine(new string('_', 95));
+            foreach (Dragon dragon in dragons)
+            {
+                Console.WriteLine(dragon.Name.PadRight(30) + dragon.Breath.PadRight(30) + dragon.Located.PadRight(30));
+                Console.WriteLine();
             }
 
             DisplayContinuePrompt();
@@ -147,16 +234,17 @@ namespace Dragonology
 
                     case "C":
                     case "c":
+                        DisplayAddDragon(dragons);
                         break;
 
                     case "D":
                     case "d":
-
+                        DisplayDeleteDragon(dragons);
                         break;
 
                     case "E":
                     case "e":
-
+                        DisplayAllDragonsInfo(dragons);
                         break;
 
                     case "F":
@@ -169,6 +257,11 @@ namespace Dragonology
                 }
             }
         }
+
+
+
+
+
         #region HELPER METHODS
 
         /// <summary>
@@ -224,12 +317,3 @@ namespace Dragonology
         #endregion
     }
 }
-
-//public enum Personality
-//{
-//    angry,
-//    greedy,
-//    vain,
-//    cruel,
-//    intelligent
-//}
