@@ -277,9 +277,9 @@ namespace Dragonology
                 Console.WriteLine("\tC) Add a Dragon");
                 Console.WriteLine("\tD) Delete a Dragon");
                 Console.WriteLine("\tE) Display All Dragon Information");
-                Console.WriteLine("\tF) Read From Dragon File");
-                Console.WriteLine("\tG) Write To Dragon File");
-                Console.WriteLine("\tH) Exit");
+                //Console.WriteLine("\tF) Read From Dragon File");
+                Console.WriteLine("\tF) Write To Dragon File");
+                Console.WriteLine("\tG) Exit");
 
                 Console.WriteLine();
                 Console.Write("\tEnter Choice: ");
@@ -312,18 +312,18 @@ namespace Dragonology
                         DisplayAllDragonsInfo(dragons);
                         break;
 
+                    //case "F":
+                    //case "f":
+                    //    dragons = DisplayLoadDragonsFromFile(dataPath);
+                        break;
+
                     case "F":
                     case "f":
-                        dragons = DisplayLoadDragonsFromFile(dataPath);
+                        DisplaySaveDragonsToFile(dataPath, dragons);
                         break;
 
                     case "G":
                     case "g":
-                        DisplaySaveDragonsToFile(dataPath, dragons);
-                        break;
-
-                    case "H":
-                    case "h":
                         exiting = true;
                         break;
 
@@ -367,39 +367,39 @@ namespace Dragonology
             DisplayContinuePrompt();
         }
 
-        /// <summary>
-        /// load dragons from file
-        /// </summary>
-        /// <param name="dataPath"></param>
-        /// <returns></returns>
-        private static List<Dragon> DisplayLoadDragonsFromFile(string dataPath)
-        {
-            List<Dragon> dragons = new List<Dragon>();
+        ///// <summary>
+        ///// load dragons from file
+        ///// </summary>
+        ///// <param name="dataPath"></param>
+        ///// <returns></returns>
+        //private static List<Dragon> DisplayLoadDragonsFromFile(string dataPath)
+        //{
+        //    List<Dragon> dragons = new List<Dragon>();
 
-            DisplayHeader("Load Dragons from File");
+        //    DisplayHeader("Load Dragons from File");
 
-            Console.WriteLine($"\tThe list of dragons will be loaded from '{dataPath}'.");
-            Console.WriteLine("\t\tPress any key to continue.");
-            Console.ReadKey();
-            Console.WriteLine(new string('_', 100));            
-            //
-            // try to read the dragons from the data file into a list
-            //
-            try
-            {
-                dragons = ReadDragonsFromCsvFile(dataPath);
-                Console.WriteLine("\tThe dragons were successfully loaded from the file.");
-            }
-            catch (Exception e) // catch any exception thrown by the read method
-            {
-                Console.Write("The following error occurred when reading from the file: ");
-                Console.WriteLine(e.Message);
-            }
+        //    Console.WriteLine($"\tThe list of dragons will be loaded from '{dataPath}'.");
+        //    Console.WriteLine("\t\tPress any key to continue.");
+        //    Console.ReadKey();
+        //    Console.WriteLine(new string('_', 100));            
+        //    //
+        //    // try to read the dragons from the data file into a list
+        //    //
+        //    try
+        //    {
+        //        dragons = ReadDragonsFromCsvFile(dataPath);
+        //        Console.WriteLine("\tThe dragons were successfully loaded from the file.");
+        //    }
+        //    catch (Exception e) // catch any exception thrown by the read method
+        //    {
+        //        Console.Write("The following error occurred when reading from the file: ");
+        //        Console.WriteLine(e.Message);
+        //    }
 
-            DisplayContinuePrompt();
+        //    DisplayContinuePrompt();
 
-            return dragons;
-        }
+        //    return dragons;
+        //}
 
         /// <summary>
         /// write dragons to file
@@ -440,51 +440,51 @@ namespace Dragonology
 
         }
 
-        /// <summary>
-        /// read dragons from file
-        /// </summary>
-        /// <param name="dataFile"></param>
-        /// <returns></returns>
-        static List<Dragon> ReadDragonsFromCsvFile(string dataFile)
-        {
-            const char delineator = ',';
+        ///// <summary>
+        ///// read dragons from file
+        ///// </summary>
+        ///// <param name="dataFile"></param>
+        ///// <returns></returns>
+        //static List<Dragon> ReadDragonsFromCsvFile(string dataFile)
+        //{
+        //    const char delineator = ',';
 
-            List<string> dragonStringList = new List<string>();
-            List<Dragon> dragonObjectList = new List<Dragon>();
-            Dragon tempDragon = new Dragon();
+        //    List<string> dragonStringList = new List<string>();
+        //    List<Dragon> dragonObjectList = new List<Dragon>();
+        //    Dragon tempDragon = new Dragon();
 
-            //
-            // read each line and put it into an array and convert the array to a list
-            //
-            try
-            {
-                dragonStringList = File.ReadAllLines(dataFile).ToList();
-            }
-            catch (Exception) // throw any exception up to the calling method
-            {
-                throw;
-            }
+        //    //
+        //    // read each line and put it into an array and convert the array to a list
+        //    //
+        //    try
+        //    {
+        //        dragonStringList = File.ReadAllLines(dataFile).ToList();
+        //    }
+        //    catch (Exception) // throw any exception up to the calling method
+        //    {
+        //        throw;
+        //    }
 
-            //
-            // create dragon object for each line of data read and fill in the property values
-            //
-            foreach (string dragonString in dragonStringList)
-            {
-                tempDragon = new Dragon();
+        //    //
+        //    // create dragon object for each line of data read and fill in the property values
+        //    //
+        //    foreach (string dragonString in dragonStringList)
+        //    {
+        //        tempDragon = new Dragon();
 
-                // use the Split method and the delineator on the array to separate each property into an array of properties
-                string[] properties = dragonString.Split(delineator);
+        //        // use the Split method and the delineator on the array to separate each property into an array of properties
+        //        string[] properties = dragonString.Split(delineator);
                 
-                tempDragon.Name = properties[0];
-                tempDragon.Breath = properties[1];
-                tempDragon.Age = Convert.ToInt32(properties[2]);
+        //        tempDragon.Name = properties[0];
+        //        tempDragon.Breath = properties[1];
+        //        tempDragon.Age = Convert.ToInt32(properties[2]);
 
-                dragonObjectList.Add(tempDragon);
-                Console.WriteLine();
-            }
+        //        dragonObjectList.Add(tempDragon);
+        //        Console.WriteLine();
+        //    }
 
-            return dragonObjectList;
-        }
+        //    return dragonObjectList;
+        //}
 
         #region HELPER METHODS
 
