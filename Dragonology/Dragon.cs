@@ -14,7 +14,8 @@ namespace Dragonology
         private string _name;
         private string _breath;
         private string _located;
-        
+        private int _age;
+        private string _color;
 
         #endregion
 
@@ -38,6 +39,17 @@ namespace Dragonology
             set { _located = value; }
         }
 
+        public int Age
+        {
+            get { return _age; }
+            set { _age = value; }
+        }
+
+        public string Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
         #endregion
 
         #region CONSTRUCTORS
